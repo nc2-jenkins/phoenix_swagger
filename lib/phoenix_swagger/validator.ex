@@ -122,15 +122,17 @@ defmodule PhoenixSwagger.Validator do
           # and collect it into json schema properties.
           properties =
             Enum.reduce(parameters, %{}, fn parameter, acc ->
-              acc =
-                if parameter["type"] == nil do
+              cond do
+                parameter["schema"]["$ref"] != nil ->
                   ref = String.split(parameter["schema"]["$ref"], "/") |> List.last()
                   Map.merge(acc, schema["definitions"][ref])
-                else
-                  acc
-                end
 
-              acc
+                parameter["schema"] != nil ->
+                  Map.merge(acc, parameter["schema"])
+
+                true ->
+                  acc
+              end
             end)
 
           # collect request primitive parameters which do not refer to `definitions`
@@ -166,7 +168,8 @@ defmodule PhoenixSwagger.Validator do
               properties
             )
 
-          schema_object = schema_object
+          schema_object =
+            schema_object
             |> Map.update("definitions", %{}, &swagger_nullable_to_json_schema/1)
 
           resolved_schema = ExJsonSchema.Schema.resolve(schema_object)
@@ -189,7 +192,8 @@ defmodule PhoenixSwagger.Validator do
 
   defp swagger_nullable_to_json_schema(schema = %{"$ref" => ref, "x-nullable" => true})
        when is_binary(ref) do
-    schema = schema
+    schema =
+      schema
       |> Map.drop(["$ref", "x-nullable"])
       |> Map.put("oneOf", [%{"type" => "null"}, %{"$ref" => ref}])
 
