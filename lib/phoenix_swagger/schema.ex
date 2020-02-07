@@ -194,6 +194,7 @@ defmodule PhoenixSwagger.Schema do
   def property(model = %Schema{type: :object}, name, type = %Schema{}, description, opts) do
     {required?, opts} = Keyword.pop(opts, :required)
     {nullable?, opts} = Keyword.pop(opts, :nullable)
+
     property_schema = struct!(type, [description: type.description || description] ++ opts)
 
     property_schema =
