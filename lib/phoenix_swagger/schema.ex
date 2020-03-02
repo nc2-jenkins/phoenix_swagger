@@ -35,6 +35,7 @@ defmodule PhoenixSwagger.Schema do
     :type,
     :items,
     :allOf,
+    :oneOf
     :properties,
     :additionalProperties,
     :discriminator,
@@ -631,6 +632,28 @@ defmodule PhoenixSwagger.Schema do
   """
   def all_of(model = %Schema{}, schemas) when is_list(schemas) do
     %{model | allOf: schemas}
+  end
+
+
+  @doc """
+  Used to combine multiple schemas, requiring a value to conform to all schemas.
+  Can be used in conjunction with `discriminator` to define polymorphic inheritance relationships.
+  See http://swagger.io/specification/#composition-and-inheritance--polymorphism--83
+
+  ## Example
+
+      iex> alias PhoenixSwagger.Schema
+      ...> %Schema{}
+      ...> |> Schema.oneOf([Schema.ref("#definitions/Contact"), Schema.ref("#definitions/CreditHistory")])
+      %PhoenixSwagger.Schema{
+        oneOf: [
+          %PhoenixSwagger.Schema{'$ref': "#definitions/Contact"},
+          %PhoenixSwagger.Schema{'$ref': "#definitions/CreditHistory"},
+        ]
+      }
+  """
+  def one_of(model = %Schema{}, schemas) when is_list(schemas) do
+    %{model | oneOf: schemas}
   end
 
   @doc """
