@@ -33,7 +33,7 @@ defmodule PhoenixSwagger.Schema do
     :type,
     :items,
     :allOf,
-    :oneOf
+    :oneOf,
     :properties,
     :additionalProperties,
     :discriminator,
@@ -588,7 +588,6 @@ defmodule PhoenixSwagger.Schema do
   def all_of(model = %Schema{}, schemas) when is_list(schemas) do
     %{model | allOf: schemas}
   end
-
 
   @doc """
   Used to combine multiple schemas, requiring a value to conform to all schemas.
