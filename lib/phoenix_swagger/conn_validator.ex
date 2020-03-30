@@ -19,7 +19,7 @@ defmodule PhoenixSwagger.ConnValidator do
          do: {:ok, conn}
   end
 
-  defp find_matching_path(conn) do
+  def find_matching_path(conn) do
     found =
       :ets.tab2list(@table)
       |> Enum.sort()
