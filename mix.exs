@@ -8,7 +8,7 @@ defmodule PhoenixSwagger.Mixfile do
     [
       app: :phoenix_swagger,
       version: @version,
-      elixir: "~> 1.8",
+      elixir: "1.9.1",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
