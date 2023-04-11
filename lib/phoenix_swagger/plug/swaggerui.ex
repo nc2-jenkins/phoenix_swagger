@@ -202,17 +202,11 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
 
   """
   def init(opts) do
-    IO.inspect(opts, label: "optsoptsopts")
-
+    IO.inspect(opts, label: "optsoptsoptsopts")
     app = Keyword.fetch!(opts, :otp_app)
     swagger_file = Keyword.fetch!(opts, :swagger_file)
     config_object = Keyword.get(opts, :config_object, %{})
-    # config_url = format_config_url(opts)
-
-    swagger_file_path = Path.join(["priv", "static", swagger_file])
-    config_url = swagger_file_path
-
-    IO.inspect(config_url, label: "config_url")
+    config_url = format_config_url(opts)
 
     body =
       EEx.eval_string(
@@ -221,7 +215,11 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
         config_url: config_url,
         spec_url: swagger_file
       )
-      |> IO.inspect(label: "body")
+
+    swagger_path = Path.join([Application.app_dir(app), swagger_file_path])
+    IO.inspect(swagger_path, label: "swagger_path")
+
+    swagger_file_path = Path.join(["priv", "static", swagger_file])
 
     [app: app, body: body, spec_url: swagger_file, swagger_file_path: swagger_file_path]
   end
