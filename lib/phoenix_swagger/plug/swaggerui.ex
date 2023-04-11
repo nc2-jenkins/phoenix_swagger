@@ -207,7 +207,10 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
     app = Keyword.fetch!(opts, :otp_app)
     swagger_file = Keyword.fetch!(opts, :swagger_file)
     config_object = Keyword.get(opts, :config_object, %{})
-    config_url = format_config_url(opts)
+    # config_url = format_config_url(opts)
+
+    swagger_file_path = Path.join(["priv", "static", swagger_file])
+    config_url = swagger_file_path
 
     IO.inspect(config_url, label: "config_url")
 
@@ -218,8 +221,7 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
         config_url: config_url,
         spec_url: swagger_file
       )
-
-    swagger_file_path = Path.join(["priv", "static", swagger_file])
+      |> IO.inspect(label: "body")
 
     [app: app, body: body, spec_url: swagger_file, swagger_file_path: swagger_file_path]
   end
