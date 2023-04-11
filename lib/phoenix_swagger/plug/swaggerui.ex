@@ -216,10 +216,10 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
         spec_url: swagger_file
       )
 
+    swagger_file_path = Path.join(["priv", "static", swagger_file])
+
     swagger_path = Path.join([Application.app_dir(app), swagger_file_path])
     IO.inspect(swagger_path, label: "swagger_path")
-
-    swagger_file_path = Path.join(["priv", "static", swagger_file])
 
     [app: app, body: body, spec_url: swagger_file, swagger_file_path: swagger_file_path]
   end
