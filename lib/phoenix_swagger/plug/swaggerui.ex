@@ -229,7 +229,7 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
   def call(conn, app: app, body: body, spec_url: url, swagger_file_path: swagger_file_path) do
     conn
     |> IO.inspect(label: "con1")
-    |> Map.drop(conn, [:path_params, :body_params])
+    |> Map.drop([:path_params, :body_params])
     |> IO.inspect(label: "con2")
     |> Conn.assign(:index_body, body)
     |> Conn.assign(:spec_url, url)
