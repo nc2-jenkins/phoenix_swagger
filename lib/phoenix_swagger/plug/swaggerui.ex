@@ -129,9 +129,6 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
         SwaggerUIBundle.presets.apis,
         SwaggerUIStandalonePreset
       ],
-      plugins: [
-        SwaggerUIBundle.plugins.DownloadUrl
-      ],
       layout: "StandaloneLayout",
       ...(config_url !== undefined && {configUrl: config_url})
     }
@@ -217,9 +214,6 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
 
     swagger_file_path = Path.join(["priv", "static", swagger_file])
 
-    swagger_path = Path.join([Application.app_dir(app), swagger_file_path])
-    IO.inspect(swagger_path, label: "swagger_path")
-
     [app: app, body: body, spec_url: swagger_file, swagger_file_path: swagger_file_path]
   end
 
@@ -228,9 +222,6 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
   """
   def call(conn, app: app, body: body, spec_url: url, swagger_file_path: swagger_file_path) do
     conn
-    |> IO.inspect(label: "con1")
-    |> Map.drop([:path_params, :body_params])
-    |> IO.inspect(label: "con2")
     |> Conn.assign(:index_body, body)
     |> Conn.assign(:spec_url, url)
     |> Conn.assign(:swagger_file_path, Path.join([Application.app_dir(app), swagger_file_path]))
