@@ -109,7 +109,8 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
     const config_url = <%= config_url %>
 
     const configObject = {
-      url: swagger_url.href,
+      url: "https://api.console.nutanix.com/api/v1/docs/frame/frame_swagger.json",
+      enableQueryConfig: false,
       dom_id: '#swagger-ui',
       deepLinking: true,
       tagsSorter: (a, b) => {
@@ -208,7 +209,8 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
     config_url = format_config_url(opts)
 
     body =
-      EEx.eval_string(@template,
+      EEx.eval_string(
+        @template,
         config_object: config_object,
         config_url: config_url,
         spec_url: swagger_file
