@@ -109,7 +109,7 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
     const config_url = <%= config_url %>
 
     const configObject = {
-      url: "https://api.console.nutanix.com/api/v1/docs/frame/frame_swagger.json",
+      url: swagger_url.href,
       enableQueryConfig: false,
       dom_id: '#swagger-ui',
       deepLinking: true,
