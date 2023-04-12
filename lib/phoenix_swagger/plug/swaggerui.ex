@@ -109,7 +109,7 @@ defmodule PhoenixSwagger.Plug.SwaggerUI do
     const config_url = <%= config_url %>
 
     const configObject = {
-      url: swagger_url.href,
+      url: swagger_url.href.split('?')[0],
       enableQueryConfig: false,
       dom_id: '#swagger-ui',
       deepLinking: true,
