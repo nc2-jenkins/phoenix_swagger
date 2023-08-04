@@ -34,11 +34,11 @@ defmodule PhoenixSwagger.Mixfile do
     [
       {:poison, "~> 2.2 or ~> 3.0", optional: true},
       {:jason, "~> 1.0", optional: true},
-      {:ex_json_schema, "~> 0.7.1", optional: true},
+      {:ex_json_schema, "~> 0.10.1", optional: true},
       # TODO: Upgrade version after update elixir version.
       {:plug, "~> 1.14.2"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false}
+      {:dialyxir, "~> 1.3.0", only: :dev, runtime: false}
     ]
   end
 
