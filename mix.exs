@@ -32,7 +32,7 @@ defmodule PhoenixSwagger.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 2.2 or ~> 3.0", optional: true},
+      {:poison, "~> 4.0", optional: true},
       {:jason, "~> 1.0", optional: true},
       {:ex_json_schema, "~> 0.10.1", optional: true},
       # TODO: Upgrade version after update elixir version.
