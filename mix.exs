@@ -32,7 +32,7 @@ defmodule PhoenixSwagger.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 5.0"},
+      {:poison, "~> 4.0"},
       {:jason, "~> 1.4.1", optional: true},
       {:ex_json_schema, "~> 0.10.2", optional: true},
       {:plug, "~> 1.15.3"},
