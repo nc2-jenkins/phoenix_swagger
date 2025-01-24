@@ -38,7 +38,7 @@ defmodule Mix.Tasks.Phx.Swagger.Generate do
       |> Keyword.get(:swagger_files, %{})
 
     if Enum.empty?(swagger_files) && !Mix.Task.recursing?() do
-      Logger.warn("""
+      Logger.warning("""
       No swagger configuration found. Ensure phoenix_swagger is configured, eg:
 
       config #{inspect(app_name())}, :phoenix_swagger,
@@ -57,7 +57,7 @@ defmodule Mix.Tasks.Phx.Swagger.Generate do
 
       case result do
         :ok -> :ok
-        {:error, reason} -> Logger.warn("Failed to generate #{output_file}: #{reason}")
+        {:error, reason} -> Logger.warning("Failed to generate #{output_file}: #{reason}")
       end
     end)
   end
@@ -167,7 +167,7 @@ defmodule Mix.Tasks.Phx.Swagger.Generate do
           verb: verb
         }
       _ ->
-        Logger.warn("Warning: #{controller} module didn't load.")
+        Logger.warning("Warning: #{controller} module didn't load.")
         nil
     end
   end
