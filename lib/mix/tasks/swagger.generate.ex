@@ -75,7 +75,6 @@ defmodule Mix.Tasks.Phx.Swagger.Generate do
 
       _ ->
         File.write!(output_file, contents)
-        Logger.info("#{app_name()}: generated #{output_file}")
     end
   end
 
