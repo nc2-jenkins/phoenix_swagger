@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8.5 - 2025-08-25
+
+  * Add priv directory to the package definition
+  * Allow minor version updates of dependencies. Thanks to @newmanjeff
+
 ## v0.8.4 - 2025-05-29
 
   * swagger-ui-dist updated to 5.2.0.
