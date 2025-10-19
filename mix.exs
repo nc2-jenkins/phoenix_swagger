@@ -2,13 +2,13 @@ defmodule PhoenixSwagger.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/xerions/phoenix_swagger"
-  @version "0.8.6"
+  @version "0.8.9"
 
   def project do
     [
       app: :phoenix_swagger,
       version: @version,
-      elixir: "~> 1.8",
+      elixir: "~> 1.15",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -25,20 +25,25 @@ defmodule PhoenixSwagger.Mixfile do
 
   def application do
     [
-      applications: [:logger, :plug],
+      applications: extra_applications(Mix.env()) ++ [:logger],
       mod: {PhoenixSwagger, []}
     ]
   end
 
+  defp extra_applications(:test) do
+    [:jason, :ex_json_schema]
+  end
+
+  defp extra_applications(_), do: []
+
   defp deps do
     [
-      {:poison, "~> 2.2 or ~> 3.0", optional: true},
-      {:jason, "~> 1.0", optional: true},
-      {:ex_json_schema, "~> 0.7.1", optional: true},
-      # TODO: Upgrade version after update elixir version.
-      {:plug, "~> 1.11.0"},
+      {:plug, "~> 1.16.0"},
+      {:poison, "~> 6.0", optional: true},
+      {:jason, "~> 1.4", optional: true},
+      {:ex_json_schema, "~> 0.9.0", optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false}
+      {:dialyxir, "~> 1.4.0", only: :dev, runtime: false}
     ]
   end
 
@@ -54,7 +59,7 @@ defmodule PhoenixSwagger.Mixfile do
         "GitHub" => @source_url,
         "Slack" => "https://elixir-lang.slack.com/messages/phoenix_swagger"
       },
-      files: ~w(lib mix.exs .formatter.exs README.md CHANGELOG.md LICENSE config)
+      files: ~w(lib mix.exs .formatter.exs README.md CHANGELOG.md LICENSE config priv)
     ]
   end
 

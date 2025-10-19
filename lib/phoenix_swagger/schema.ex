@@ -643,7 +643,7 @@ defmodule PhoenixSwagger.Schema do
 
       iex> alias PhoenixSwagger.Schema
       ...> %Schema{}
-      ...> |> Schema.oneOf([Schema.ref("#definitions/Contact"), Schema.ref("#definitions/CreditHistory")])
+      ...> |> Schema.one_of([Schema.ref("#definitions/Contact"), Schema.ref("#definitions/CreditHistory")])
       %PhoenixSwagger.Schema{
         oneOf: [
           %PhoenixSwagger.Schema{'$ref': "#definitions/Contact"},
